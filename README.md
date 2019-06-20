@@ -1,2 +1,2 @@
-# will-s-baker
-A cute BAKER!
+# will-s-bakery
+A cute BAKERY!
