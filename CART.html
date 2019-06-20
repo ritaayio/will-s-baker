@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+
+<head>
+    <meta charset="UTF-8">
+    <title>購物車</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src=" https://hkvar.nctu.edu.tw/js/skrollr.min.js">
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700&display=swap" rel="stylesheet">
+
+    <script>
+        (function($) {
+            $.fn.menumaker = function(options) {
+                var cssmenu = $(this),
+                    settings = $.extend({
+                        format: "dropdown",
+                        sticky: false
+                    }, options);
+                return this.each(function() {
+                    $(this).find(".button").on('click', function() {
+                        $(this).toggleClass('menu-opened');
+                        var mainmenu = $(this).next('ul');
+                        if (mainmenu.hasClass('open')) {
+                            mainmenu.slideToggle().removeClass('open');
+                        } else {
+                            mainmenu.slideToggle().addClass('open');
+                            if (settings.format === "dropdown") {
+                                mainmenu.find('ul').show();
+                            }
+                        }
+                    });
+                    cssmenu.find('li ul').parent().addClass('has-sub');
+                    multiTg = function() {
+                        cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
+                        cssmenu.find('.submenu-button').on('click', function() {
+                            $(this).toggleClass('submenu-opened');
+                            if ($(this).siblings('ul').hasClass('open')) {
+                                $(this).siblings('ul').removeClass('open').slideToggle();
+                            } else {
+                                $(this).siblings('ul').addClass('open').slideToggle();
+                            }
+                        });
+                    };
+                    if (settings.format === 'multitoggle') multiTg();
+                    else cssmenu.addClass('dropdown');
+                    if (settings.sticky === true) cssmenu.css('position', 'fixed');
+                    resizeFix = function() {
+                        var mediasize = 1000;
+                        if ($(window).width() > mediasize) {
+                            cssmenu.find('ul').show();
+                        }
+                        if ($(window).width() <= mediasize) {
+                            cssmenu.find('ul').hide().removeClass('open');
+                        }
+                    };
+                    resizeFix();
+                    return $(window).on('resize', resizeFix);
+                });
+            };
+        })(jQuery);
+        (function($) {
+            $(document).ready(function() {
+                $("#cssmenu").menumaker({
+                    format: "multitoggle"
+                });
+            });
+        })(jQuery);
+
+
+
+        window.onload = function() {
+            skrollr.init({
+                forceHeight: false
+            });
+        }
+
+        $(document).ready(function() {
+            $("#close1").click(function() {
+                $("#close1").hide();
+                $("#cartpic1").hide();
+                $("#line1").hide();
+                $("#line").hide();
+                $("#line3").show();
+            });
+
+        });
+
+        $(document).ready(function() {
+            $("#close2").click(function() {
+                $("#close2").hide();
+                $("#cartpic2").hide();
+                $("#line2").hide();
+                $("#nocake").show();
+                $("#line3").hide();
+                $("#line4").show();
+            });
+
+        });
+
+    </script>
+    <style>
+        {
+            margin: 0;
+            padding: 0;
+            text-decoration: none
+        }
+
+        body {
+            background: #fff;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        header {
+            position: relative;
+            width: 100%;
+            background: #FFCC22;
+        }
+
+        .logo {
+            position: relative;
+            z-index: 123;
+            padding: 10px;
+            font: 18px verdana;
+            color: #555;
+            float: left;
+            width: 15%
+        }
+
+        .logo a {
+            color: #333;
+        }
+
+        nav {
+            position: relative;
+            width: 980px;
+            margin: 0 auto;
+        }
+
+        #cssmenu,
+        #cssmenu ul,
+        #cssmenu ul li,
+        #cssmenu ul li a,
+        #cssmenu #head-mobile {
+            border: 0;
+            list-style: none;
+            line-height: 1;
+            display: block;
+            position: relative;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        #cssmenu:after,
+        #cssmenu>ul:after {
+            content: ".";
+            display: block;
+            clear: both;
+            visibility: hidden;
+            line-height: 0;
+            height: 0
+        }
+
+        #cssmenu #head-mobile {
+            display: none
+        }
+
+        #cssmenu {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: #FFCC22
+        }
+
+        #cssmenu>ul>li {
+            float: left
+        }
+
+        #cssmenu>ul>li>a {
+            padding: 17px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+        }
+
+        #cssmenu>ul>li:hover>a,
+        #cssmenu ul li.active a {
+            color: #fff
+        }
+
+        #cssmenu>ul>li:hover,
+        #cssmenu ul li.active:hover,
+        #cssmenu ul li.active,
+        #cssmenu ul li.has-sub.active:hover {
+            background: #FFBB00 !important;
+            -webkit-transition: background .3s ease;
+            -ms-transition: background .3s ease;
+            transition: background .3s ease;
+        }
+
+        #cssmenu>ul>li.has-sub>a {
+            padding-right: 30px
+        }
+
+        #cssmenu>ul>li.has-sub>a:after {
+            position: absolute;
+            top: 22px;
+            right: 11px;
+            width: 8px;
+            height: 2px;
+            display: block;
+            background: #fff;
+            content: ''
+        }
+
+        #cssmenu>ul>li.has-sub>a:before {
+            position: absolute;
+            top: 19px;
+            right: 14px;
+            display: block;
+            width: 2px;
+            height: 8px;
+            background: #fff;
+            content: '';
+            -webkit-transition: all .25s ease;
+            -ms-transition: all .25s ease;
+            transition: all .25s ease
+        }
+
+        #cssmenu>ul>li.has-sub:hover>a:before {
+            top: 23px;
+            height: 0
+        }
+
+        #cssmenu ul ul {
+            position: absolute;
+            left: -9999px
+        }
+
+        #cssmenu ul ul li {
+            height: 0;
+            -webkit-transition: all .25s ease;
+            -ms-transition: all .25s ease;
+            background: #333;
+            transition: all .25s ease
+        }
+
+        #cssmenu ul ul li:hover {}
+
+        #cssmenu li:hover>ul {
+            left: auto
+        }
+
+        #cssmenu li:hover>ul>li {
+            height: 35px
+        }
+
+        #cssmenu ul ul ul {
+            margin-left: 100%;
+            top: 0
+        }
+
+        #cssmenu ul ul li a {
+            border-bottom: 1px solid rgba(150, 150, 150, 0.15);
+            padding: 11px 15px;
+            width: 170px;
+            font-size: 12px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 400;
+        }
+
+        #cssmenu ul ul li:last-child>a,
+        #cssmenu ul ul li.last-item>a {
+            border-bottom: 0
+        }
+
+        #cssmenu ul ul li:hover>a,
+        #cssmenu ul ul li a:hover {
+            color: #fff
+        }
+
+
+
+        @media screen and (max-width:1000px) {
+            .logo {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 46px;
+                text-align: center;
+                padding: 10px 0 0 0;
+                float: none
+            }
+
+            .logo2 {
+                display: none
+            }
+
+            nav {
+                width: 100%;
+            }
+
+            #cssmenu {
+                width: 100%
+            }
+
+            #cssmenu ul {
+                width: 100%;
+                display: none
+            }
+
+            #cssmenu ul li {
+                width: 100%;
+                border-top: 1px solid #444
+            }
+
+            #cssmenu ul li:hover {
+                background: #FFCC22;
+            }
+
+            #cssmenu ul ul li,
+            #cssmenu li:hover>ul>li {
+                height: auto
+            }
+
+            #cssmenu ul li a,
+            #cssmenu ul ul li a {
+                width: 100%;
+                border-bottom: 0
+            }
+
+            #cssmenu>ul>li {
+                float: none
+            }
+
+            #cssmenu ul ul li a {
+                padding-left: 25px
+            }
+
+            #cssmenu ul ul li {
+                background: #FFCC22 !important;
+            }
+
+            #cssmenu ul ul li:hover {
+                background: #FFCC22 !important
+            }
+
+            #cssmenu ul ul ul li a {
+                padding-left: 35px
+            }
+
+            #cssmenu ul ul li a {
+                color: #ddd;
+                background: none
+            }
+
+            #cssmenu ul ul li:hover>a,
+            #cssmenu ul ul li.active>a {
+                color: #fff
+            }
+
+            #cssmenu ul ul,
+            #cssmenu ul ul ul {
+                position: relative;
+                left: 0;
+                width: 100%;
+                margin: 0;
+                text-align: left
+            }
+
+            #cssmenu>ul>li.has-sub>a:after,
+            #cssmenu>ul>li.has-sub>a:before,
+            #cssmenu ul ul>li.has-sub>a:after,
+            #cssmenu ul ul>li.has-sub>a:before {
+                display: none
+            }
+
+            #cssmenu #head-mobile {
+                display: block;
+                padding: 23px;
+                color: #fff;
+                font-size: 12px;
+                font-weight: 700
+            }
+
+            .button {
+                width: 55px;
+                height: 46px;
+                position: absolute;
+                right: 0;
+                top: 0;
+                cursor: pointer;
+                z-index: 12399994;
+            }
+
+            .button:after {
+                position: absolute;
+                top: 24px;
+                right: 20px;
+                display: block;
+                height: 9px;
+                width: 20px;
+                border-top: 2px solid #fff;
+                border-bottom: 2px solid #fff;
+                content: ''
+            }
+
+            .button:before {
+                -webkit-transition: all .3s ease;
+                -ms-transition: all .3s ease;
+                transition: all .3s ease;
+                position: absolute;
+                top: 17px;
+                right: 20px;
+                display: block;
+                height: 2px;
+                width: 20px;
+                background: #fff;
+                content: ''
+            }
+
+            .button.menu-opened:after {
+                -webkit-transition: all .3s ease;
+                -ms-transition: all .3s ease;
+                transition: all .3s ease;
+                top: 23px;
+                border: 0;
+                height: 2px;
+                width: 19px;
+                background: #fff;
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+                transform: rotate(45deg)
+            }
+
+            .button.menu-opened:before {
+                top: 23px;
+                background: #fff;
+                width: 19px;
+                -webkit-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+                transform: rotate(-45deg)
+            }
+
+            #cssmenu .submenu-button {
+                position: absolute;
+                z-index: 99;
+                right: 0;
+                top: 0;
+                display: block;
+                border-left: 1px solid #FFCC22;
+                height: 46px;
+                width: 46px;
+                cursor: pointer
+            }
+
+            #cssmenu .submenu-button.submenu-opened {
+                background: #262626
+            }
+
+            #cssmenu ul ul .submenu-button {
+                height: 34px;
+                width: 34px
+            }
+
+            #cssmenu .submenu-button:after {
+                position: absolute;
+                top: 22px;
+                right: 19px;
+                width: 8px;
+                height: 2px;
+                display: block;
+                background: #fff;
+                content: ''
+            }
+
+            #cssmenu ul ul .submenu-button:after {
+                top: 15px;
+                right: 13px
+            }
+
+            #cssmenu .submenu-button.submenu-opened:after {
+                background: #fff
+            }
+
+            #cssmenu .submenu-button:before {
+                position: absolute;
+                top: 19px;
+                right: 22px;
+                display: block;
+                width: 2px;
+                height: 8px;
+                background: #fff;
+                content: ''
+            }
+
+            #cssmenu ul ul .submenu-button:before {
+                top: 12px;
+                right: 16px
+            }
+
+            #cssmenu .submenu-button.submenu-opened:before {
+                display: none
+            }
+
+            #cssmenu ul ul ul li.active a {
+                border-left: none
+            }
+
+            #cssmenu>ul>li.has-sub>ul>li.active>a,
+            #cssmenu>ul ul>li.has-sub>ul>li.active>a {
+                border-top: none
+            }
+        }
+
+
+        #text-5 {
+            padding: 55px 20px 20px 20px;
+
+
+        }
+
+        #text-6 {
+            padding: 75px 20px 20px 20px;
+
+        }
+
+
+
+        #text-7 {
+            padding: 45px 20px 20px 20px;
+
+        }
+
+        div#bread {
+            position: relative;
+
+        }
+
+        img#tag-8 {
+            position: absolute;
+            top: 20px;
+            left: -5px;
+            height: 23.4px;
+            width: 113.55px;
+        }
+
+        img#tag-9 {
+            position: absolute;
+            top: 20px;
+            left: -5px;
+            height: 23.4px;
+            width: 113.55px;
+        }
+
+        img#tag-10 {
+            position: absolute;
+            top: 20px;
+            left: -5px;
+            height: 23.4px;
+            width: 113.55px;
+        }
+
+
+        #cart {
+            padding: 20px;
+            border: 2px;
+            border-style: solid;
+            border-color: #FFCC22;
+            background: #FFCC22;
+            border-radius: 25px;
+            margin-bottom: 30px;
+
+        }
+
+        #line {
+            border-bottom: 4px solid #FFCC22;
+            padding: 10px 0px 0px 0px;
+            text-align: center;
+            font-weight: 500;
+            letter-spacing: 6px;
+            word-spacing: 6px;
+        }
+
+        #line1 {
+            border-left: 2px solid #222;
+            padding: 10px;
+            
+
+        }
+
+        #line2 {
+            border-left: 2px solid #222;
+            padding: 10px;
+        }
+        
+        
+
+        #line3 {
+
+            border-bottom: 4px solid #FFCC22;
+            padding: 10px 0px 0px 0px;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+            letter-spacing: 6px;
+            word-spacing: 6px;
+        }
+        
+        
+
+        #line4 {
+            border-bottom: 4px solid #FFCC22;
+            padding: 10px 0px 0px 0px;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+            letter-spacing: 6px;
+            word-spacing: 6px;
+        }
+
+
+
+        #name {
+            color: #222;
+            padding: 20px 0px 0px 10px;
+            text-align: left;
+            font-weight: 500;
+
+        }
+
+        #namefirst {
+            color: #222;
+            padding: 0px 0px 0px 10px;
+            font-weight: 500;
+
+        }
+
+        #cartpic1 {
+            padding: 20px;
+            position: relative;
+            margin-bottom: 50px;
+
+
+        }
+
+        #cartpic2 {
+            padding: 20px;
+            position: relative;
+            margin-bottom: 50px;
+
+        }
+
+
+
+        #buy {
+            margin: 20px;
+            border: 2px solid #FFCC22;
+
+            text-align: center;
+            background-color: #FFCC22;
+            padding: 10px;
+            color: #fff;
+            height: 45px;
+            border-radius: 10px;
+            letter-spacing: 5px;
+
+
+            transition: background 0.6s, color 0.6s;
+        }
+
+        #buy:hover {
+            background-color: #fff;
+            color: #FFCC22;
+            font-weight: 500;
+        }
+
+        a {
+
+            color: #fff
+        }
+
+        a:hover {
+
+            color: #FFCC22;
+            text-decoration: none
+        }
+
+        #close1 {
+            padding: 20px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            filter: opacity(0%);
+            margin-bottom: 50px;
+            transition: filter 0.8s ease-in-out;
+
+
+        }
+
+        #close1:hover {
+            padding: 20px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            filter: opacity(100%);
+            border: 2px;
+            border-color: #FFCC22;
+        }
+
+        #close2 {
+            padding: 20px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            filter: opacity(0%);
+            margin-bottom: 50px;
+            transition: filter 0.8s ease-in-out;
+
+        }
+
+        #close2:hover {
+            padding: 20px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            filter: opacity(100%);
+        }
+
+        #reload {
+            font-size: 15px;
+            position: relative;
+            top: 40px;
+            left: -10px;
+            text-align: center;
+            background-color: #999;
+            padding: 10px;
+            color: #DDD;
+            height: 45px;
+            border-radius: 10px;
+        }
+
+        #reload:hover {
+            background-color: #fff;
+            color: #FFCC22;
+        }
+
+        #nocake {
+            margin: 20px position: absolute;
+            top: 0px;
+            padding: 20px 20px 20px 20px;
+            text-align: left;
+            font-weight: 500;
+            display: none;
+
+        }
+
+        #top_text {
+            color: #444;
+            font-weight: bold;
+            font-size: 30px;
+            text-align: center;
+            letter-spacing: 3px;
+            word-spacing: 6px;
+            padding: 60px 20px 20px 20px;
+            background-image: url(background-01.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+           
+        }
+
+       
+    </style>
+
+</head>
+
+
+
+
+
+
+
+
+
+<body>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+
+    <header>
+        <nav id='cssmenu'>
+            <div class="logo"><a href='index.html'> Will's Bakery </a></div>
+            <div id="head-mobile"></div>
+            <div class="button"></div>
+            <ul>
+                <li><a href='index.html'>HOME 首頁</a></li>
+                <li><a href='About.html'>ABOUT 關於我們</a></li>
+                <li><a href='menu.html'>MENU 菜單</a>
+
+                </li>
+                <li><a href='store.html'>STORE 店鋪</a></li>
+                <li><a href='onlineshop.html'>ONLINE SHOP 線上商店</a></li>
+                <li class='active'><a href='CART.html'>CART 購物車</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <div class="col-12 col-sm-12" id="top_text">
+        <p>購物車<br>CART</p>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-12 col-sm-12">
+                <p><br></p>
+            </div>
+            <div class="col-auto col-sm-1"></div>
+            <div class="col-12 col-sm-10" id="cart">
+                <div class="col-12 col-sm-12">
+                    <div class="col-1 col-sm-1"></div>
+
+                    <div class="col-8 col-sm-8" id="namefirst">
+                        <p  id="line1">巧克力磅蛋糕 500NT ＿＿一個</p>
+                    </div>
+
+                </div>
+                <div class="col-8 col-sm-8" id="nocake">
+                    <p>購物車內目前無商品</p>
+                </div>
+                <div class="col-12 col-sm-12">
+                    <div class="col-8 col-sm-8" id="name">
+                        <p  id="line2">抹茶磅蛋糕 500NT ＿＿＿一個</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-auto col-sm-3"></div>
+            <div class="col-6 col-sm-3"><img src="choco_cake-05.jpg" alt="" class="w-100 img-fluid" id="cartpic1">
+                <a href="#"><img src="chococlose-05.png" alt="" class="w-100 img-fluid" id="close1"></a>
+            </div>
+            <div class="col-6 col-sm-3"><img src="tea_cake-05.jpg" alt="" class="w-100 img-fluid" id="cartpic2">
+                <a href="#"><img src="teaclose-05.png" alt="" class="w-100 img-fluid" id="close2"></a>
+            </div>
+
+            <div class="col-2 col-sm-3"></div>
+            <div class="col-1 col-sm-3"></div>
+            <div class="col-1 col-sm-1">
+
+            </div>
+            <div class="col-4 col-sm-4" id="line">
+                <p>總額<br> 1000NT</p>
+                 
+            </div>
+            <div class="col-4 col-sm-4" id="line3">
+                <p>總額<br> 500NT</p>
+                 
+            </div>
+            <div class="col-4 col-sm-4" id="line4">
+                <p>總額<br> 0NT</p>
+                 
+            </div>
+           
+            <div class="col-12">
+                <p><br></p>
+            </div>
+            
+            <div class="col-4"></div>
+            <div class="col-4">
+                <a href="#">
+                    <p id="buy">確認結帳</p>
+                </a>
+            </div>
+            <div class="col-4" id=""></div>
+        </div>
+    </div>
+
+    <div>
+        <p><br></p>
+    </div>
+    
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+</body>
