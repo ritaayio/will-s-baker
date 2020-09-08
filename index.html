@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+ 
+<head>
+    <meta charset="UTF-8">
+    <title> Will's Bakery</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+     <script src=" https://hkvar.nctu.edu.tw/js/skrollr.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#btn1").click(function() {
+                $("#more").append(" <b>每日新鮮材料</b>.");
+            });
+
+        });
+
+    </script>
+     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700&display=swap" rel="stylesheet">
+
+   <meta name="author" content="ritaayio 曾宇彤">
+  
+   <meta name="description" content="烘焙坊網站設計，以展示為主，非真實販售網站。">
+   <meta name="keywords" content="烘焙坊,網站設計,甜點,威爾的烘焙坊,Will's Bakery">
+   
+   
+   
+    <script>
+        (function($) {
+            $.fn.menumaker = function(options) {
+                var cssmenu = $(this),
+                    settings = $.extend({
+                        format: "dropdown",
+                        sticky: false
+                    }, options);
+                return this.each(function() {
+                    $(this).find(".button").on('click', function() {
+                        $(this).toggleClass('menu-opened');
+                        var mainmenu = $(this).next('ul');
+                        if (mainmenu.hasClass('open')) {
+                            mainmenu.slideToggle().removeClass('open');
+                        } else {
+                            mainmenu.slideToggle().addClass('open');
+                            if (settings.format === "dropdown") {
+                                mainmenu.find('ul').show();
+                            }
+                        }
+                    });
+                    cssmenu.find('li ul').parent().addClass('has-sub');
+                    multiTg = function() {
+                        cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
+                        cssmenu.find('.submenu-button').on('click', function() {
+                            $(this).toggleClass('submenu-opened');
+                            if ($(this).siblings('ul').hasClass('open')) {
+                                $(this).siblings('ul').removeClass('open').slideToggle();
+                            } else {
+                                $(this).siblings('ul').addClass('open').slideToggle();
+                            }
+                        });
+                    };
+                    if (settings.format === 'multitoggle') multiTg();
+                    else cssmenu.addClass('dropdown');
+                    if (settings.sticky === true) cssmenu.css('position', 'fixed');
+                    resizeFix = function() {
+                        var mediasize = 1000;
+                        if ($(window).width() > mediasize) {
+                            cssmenu.find('ul').show();
+                        }
+                        if ($(window).width() <= mediasize) {
+                            cssmenu.find('ul').hide().removeClass('open');
+                        }
+                    };
+                    resizeFix();
+                    return $(window).on('resize', resizeFix);
+                });
+            };
+        })(jQuery);
+
+        (function($) {
+            $(document).ready(function() {
+                $("#cssmenu").menumaker({
+                    format: "multitoggle"
+                });
+            });
+        })(jQuery);
+
+    </script>
+    <style>
+
+        
+        #section1,
+        #section2,
+        #section3,
+        #section4
+    
+         {
+            filter: 
+           grayscale(0%);
+           mix-blend-mode: luminosity
+           
+        }
+
+        
+        #section1:hover,
+        #section2:hover,
+        #section3:hover,
+        #section4:hover
+        {
+            filter: 
+             grayscale(0%);
+             mix-blend-mode: normal;
+             
+
+
+             
+        }
+       
+        
+    </style>
+
+</head>
+
+<body>
+
+
+
+
+    <div class="container-fluid" >
+        <div class="row no-gutters" >
+            <div class="col-6 col-md-3 order-md-1 bg-warning">
+                <img src="out-2%20-04.png" alt="out" class="img-fluid">
+            </div>
+            <div class="col-6 col-md-3 order-md-4 bg-warning">
+                <img src="out-2%20-05.png" alt="out" class="img-fluid">
+            </div>
+            <div class="col-6 col-md-3 order-md-2 bg-warning" >
+                <a href="store.html"><img src="main-2-06.png" alt="1" class="img-fluid" id="section1"></a>
+            </div>
+            <div class="col-6 col-md-3 order-md-3 bg-warning">
+                <a href="onlineshop.html"><img src="main-2-07.png" alt="2" class="img-fluid" id="section2"></a>
+            </div>
+            <div class="col-6 col-md-3 order-md-6 bg-warning">
+                <a href="menu.html"><img src="main-2-08.png" alt="3" class="img-fluid" id="section3"></a>
+            </div>
+            <div class="col-6 col-md-3 order-md-7 bg-warning">
+                <a href="About.html"><img src="main-2-09.png" alt="4" class="img-fluid" id="section4"></a>
+            </div>
+            <div class="col-6 col-md-3 order-md-5 bg-warning">
+                <img src="out-2-3%20-05.png" alt="out" class="img-fluid">
+
+            </div>
+            <div class="col-6 col-md-3 order-md-8 bg-warning">
+                <img src="out-2%20-04.png" alt="out" class="img-fluid">
+
+            </div>
+            
+           
+
+        </div>
+    </div>
+
+
+   
+</body>
+
+</html>
